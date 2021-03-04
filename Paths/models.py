@@ -762,8 +762,8 @@ class Global_Scene_CAM_Path_NFDecoder(CAM):
 
         # print(x_prev.unsqueeze(-2).size())
         # print(goal.size())
-        # interpolated_feature, _ = self.interpolator(episode_idx, x_prev.unsqueeze(-2), local_scene_encoding_, 0.0) # [A X 6]	
-        interpolated_feature, _ = self.interpolator(episode_idx, goal.unsqueeze(1), local_scene_encoding_, 0.0) # [A X 6]	
+        interpolated_feature, _ = self.interpolator(episode_idx, x_prev.unsqueeze(-2), local_scene_encoding_, 0.0) # [A X 6]	
+        # interpolated_feature, _ = self.interpolator(episode_idx, goal.unsqueeze(1), local_scene_encoding_, 0.0) # [A X 6]	
         interpolated_feature = interpolated_feature.squeeze(-2)	
         context_encoding, _ = self.context_fusion(agent_encodings, interpolated_feature) # [A X 50]	
 
@@ -808,8 +808,8 @@ class Global_Scene_CAM_Path_NFDecoder(CAM):
         
         init_loc = decode_start_pos.unsqueeze(1) # [A X 1 X 2] Initial location
         goal = tgt_trajs[:, -1, :].unsqueeze(1) # [A X 1 X 2] Initial location
-        # interpolated_feature, _ = self.interpolator(episode_idx, init_loc, local_scene_encoding_, 0.0) # [A X Td X Ce]	
-        interpolated_feature, _ = self.interpolator(episode_idx, goal, local_scene_encoding_, 0.0) # [A X Td X Ce]	
+        interpolated_feature, _ = self.interpolator(episode_idx, init_loc, local_scene_encoding_, 0.0) # [A X Td X Ce]	
+        # interpolated_feature, _ = self.interpolator(episode_idx, goal, local_scene_encoding_, 0.0) # [A X Td X Ce]	
 
         # Repeat motion encdoing for unrollig time
         agent_encodings = agent_encodings_.unsqueeze(dim=1) # (B X 1 X Dim)

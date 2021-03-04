@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import cv2
 from tqdm import tqdm
 
-from Proposed.models import Global_Scene_CAM_GOAL_NFDecoder
+from Proposed.models import Global_Scene_CAM_NFDecoder
 from Proposed.utils import ModelTrainer, ModelTest
 from R2P2_MA.model_utils import MSE_Ploss, Interpolated_Ploss
 

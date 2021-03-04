@@ -303,6 +303,7 @@ class ModelTrainer:
                     # ploss = self.ploss_criterion(gen_trajs, past_agents_traj)
                     ploss = self.ploss_criterion(gen_goals, future_agents_traj[:,-1,:].unsqueeze(1))
                 else:
+                    # ploss = self.ploss_criterion(episode_idx, gen_goals, log_prior, -15.0) + self.path_ploss_criterion(gen_goals, future_agents_traj[:,-1,:].unsqueeze(1))
                     ploss = self.ploss_criterion(episode_idx, gen_goals, log_prior, -15.0)
 
             else:

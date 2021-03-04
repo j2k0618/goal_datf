@@ -908,29 +908,11 @@ class CrossModalPathDecoder(nn.Module):
             nn.ReLU(),
             nn.Linear(50, 100),
             nn.ReLU(),
-            nn.Linear(100, 100),
-            nn.ReLU(),
             nn.Linear(100, hidden_size) # DON'T USE ACTIVATION AT THE TOP MOST LAYER
         )
         self.crossmodal_attention = CrossModalAttention(encoder_dim=image_dim, decoder_dim=hidden_size, attention_dim=hidden_size, att=att) # map2agent attention
         self.mlp = nn.Sequential(
-            nn.Linear(hidden_size+context_dim+image_dim+goal_enc_dim, 150),
-            nn.ReLU(),
-            nn.Linear(150, 100),
-            nn.ReLU(),
-            nn.Linear(100, 100),
-            # nn.Linear(hidden_size+context_dim+image_dim, 50),
-            nn.Softplus(),
-            nn.Linear(100, 50),
-            nn.Tanh(),
-            nn.Linear(50, 6 * decoding_steps) # DON'T USE ACTIVATION AT THE TOP MOST LAYER
-        )
-        self.mlp_from_goal = nn.Sequential(
-            nn.Linear(hidden_size+context_dim+image_dim+goal_enc_dim, 150),
-            nn.ReLU(),
-            nn.Linear(150, 100),
-            nn.ReLU(),
-            nn.Linear(100, 100),
+            nn.Linear(hidden_size+context_dim+image_dim+goal_enc_dim, 100),
             # nn.Linear(hidden_size+context_dim+image_dim, 50),
             nn.Softplus(),
             nn.Linear(100, 50),

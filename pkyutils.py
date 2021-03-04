@@ -447,11 +447,11 @@ class DatasetQ10(torch.utils.data.dataset.Dataset):
             episode = self.episodes[idx]
             past, past_len, future, future_len, agent_mask, vel, pos, sample_idx = episode
 
-            # with open('{}/map_old/{}.bin'.format(self.data_dir, sample_idx), 'rb') as f:
-            with open('{}/map/{}.bin'.format(self.data_dir, sample_idx), 'rb') as f:
+            with open('{}/map_old/{}.bin'.format(self.data_dir, sample_idx), 'rb') as f:
+            # with open('{}/map/{}.bin'.format(self.data_dir, sample_idx), 'rb') as f:
                 map_img = pickle.load(f)
-            # with open('{}/prior_old/{}.bin'.format(self.data_dir, sample_idx), 'rb') as f:
-            with open('{}/prior/{}.bin'.format(self.data_dir, sample_idx), 'rb') as f:
+            with open('{}/prior_old/{}.bin'.format(self.data_dir, sample_idx), 'rb') as f:
+            # with open('{}/prior/{}.bin'.format(self.data_dir, sample_idx), 'rb') as f:
                 prior = pickle.load(f)
 
             data = (past, past_len, future[agent_mask], future_len[agent_mask], agent_mask,

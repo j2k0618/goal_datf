@@ -915,6 +915,7 @@ class CrossModalPathDecoder(nn.Module):
         self.crossmodal_attention = CrossModalAttention(encoder_dim=image_dim, decoder_dim=hidden_size, attention_dim=hidden_size, att=att) # map2agent attention
         self.mlp = nn.Sequential(
             nn.Linear(hidden_size+context_dim+image_dim+goal_enc_dim, 100),
+            # nn.Linear(hidden_size+context_dim+image_dim, 100),
             nn.ReLU(),
             nn.Linear(100, 50),
             nn.ReLU(),
@@ -948,6 +949,7 @@ class CrossModalPathDecoder(nn.Module):
         att_scene, alpha = self.crossmodal_attention(global_scene_encoding, dynamic_encoding, episode_idx)
 
         dynamic_static = torch.cat((dynamic_encoding, static, att_scene, goal_encoding), dim=-1) # B X T X 200
+        # dynamic_static = torch.cat((dynamic_encoding, static, att_scene), dim=-1) # B X T X 200
         
         # 2-layer MLP
         output = self.mlp(dynamic_static)# B X (T X 2)
